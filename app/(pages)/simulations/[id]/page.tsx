@@ -56,6 +56,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogTitle = `${title} | PhysicsHub`;
   const description = chapter.desc;
   const canonical = `/simulations/${id}`;
+  // `thumbnail` is optional in chapters.js — the catalogue card already falls
+  // back to a generated tile, so share cards fall back to the site image.
+  const shareImage = chapter.thumbnail ?? "/Thumbnail.jpg";
 
   return {
     title: title,
@@ -69,13 +72,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${SITE_URL}${canonical}`,
       title: ogTitle,
       description: description,
-      images: [chapter.thumbnail],
+      images: [shareImage],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description: description,
-      images: [chapter.thumbnail],
+      images: [shareImage],
     },
   };
 }
